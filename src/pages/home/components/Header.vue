@@ -17,7 +17,8 @@ export default {
 <style lang="stylus" scoped>
 /* lang="stylus" 使用stylus编写css样式 scoped 样式只对当前组件生效 */
 /* 1rem等于html的font-size等于50px */
-/* font-size为50px 因为是2倍图 设计图上的86px就等于43px 43除以50等于0.86 如果直接按照2倍设计图尺寸86除以100等于0.86 */
+/* font-size为50px 因为是2倍图 设计图上的86px就等于43px 43除以50等于0.86 */
+/* 如果直接按照2倍设计图尺寸86除以100等于0.86 */
 .header
   display flex
   line-height 0.86rem
