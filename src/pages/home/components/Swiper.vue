@@ -22,7 +22,8 @@ export default {
     return {
       // 定义 swiperOption
       swiperOption: {
-        // 配置项 显示分页小圆点
+        // 配置项
+        // 显示分页小圆点
         pagination: '.swiper-pagination',
         // 支持循环轮播
         loop: true
