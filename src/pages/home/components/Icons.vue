@@ -58,7 +58,10 @@ export default {
         id: '0009',
         imgUrl: 'http://img1.qunarzz.com/piao/fusion/1804/5a/13ceb38dcf262f02.png',
         desc: '一日游'
-      }]
+      }],
+      swiperOption: {
+        autoplay: false
+      }
     }
   },
   // 计算属性
