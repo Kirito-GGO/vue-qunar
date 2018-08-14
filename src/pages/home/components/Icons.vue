@@ -20,46 +20,13 @@
 <script>
 export default {
   name: 'HomeIcons',
+  props: {
+    list: Array
+  },
   data () {
     return {
-      iconList: [{
-        id: '0001',
-        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-        desc: '景点门票'
-      }, {
-        id: '0002',
-        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1804/ff/fdf170ee89594b02.png',
-        desc: '北京必游'
-      }, {
-        id: '0003',
-        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/6a/45f595250c73d102.png',
-        desc: '夏日玩水'
-      }, {
-        id: '0004',
-        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/20/831d62d2e1c7be02.png',
-        desc: '文化古迹'
-      }, {
-        id: '0005',
-        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-        desc: '景点门票'
-      }, {
-        id: '0006',
-        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1804/ff/fdf170ee89594b02.png',
-        desc: '北京必游'
-      }, {
-        id: '0007',
-        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/6a/45f595250c73d102.png',
-        desc: '夏日玩水'
-      }, {
-        id: '0008',
-        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/20/831d62d2e1c7be02.png',
-        desc: '文化古迹'
-      }, {
-        id: '0009',
-        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1804/5a/13ceb38dcf262f02.png',
-        desc: '一日游'
-      }],
       swiperOption: {
+        // 轮播图禁止自动滚动
         autoplay: false
       }
     }
@@ -67,22 +34,24 @@ export default {
   // 计算属性
   computed: {
     pages () {
-      const pages = []
-      // 循环iconList中的数据
-      // 参数1 具体的循环项 参数2 循环项对应的下标
-      this.iconList.forEach((item, index) => {
-        // page 当前下标对应的数据 应该展示在轮播图的第几页
-        // 假如是第3个数据 index对应的值是2 2除以8向下取整 为0 说明这条数据应该展示在第0页
-        // 假如是第8个数据 index对应的值是9 9除以8向下取整 为1 说明这条数据应该展示在第1页
-        // floor() 方法执行的是向下取整计算，它返回的是小于或等于函数参数，并且与之最接近的整数
-        const page = Math.floor(index / 8)
-        if (!pages[page]) {
-          pages[page] = []
-        }
-        pages[page].push(item)
-      })
-      // pages为一个二维数组 包含了每页应该显示的内容
-      return pages
+      if (this.list.length) {
+        const pages = []
+        // 循环list中的数据
+        // 参数1 具体的循环项 参数2 循环项对应的下标
+        this.list.forEach((item, index) => {
+          // page 当前下标对应的数据 应该展示在轮播图的第几页
+          // 假如是第3个数据 index对应的值是2 2除以8向下取整 为0 说明这条数据应该展示在第0页
+          // 假如是第8个数据 index对应的值是9 9除以8向下取整 为1 说明这条数据应该展示在第1页
+          // floor() 方法执行的是向下取整计算，它返回的是小于或等于函数参数，并且与之最接近的整数
+          const page = Math.floor(index / 8)
+          if (!pages[page]) {
+            pages[page] = []
+          }
+          pages[page].push(item)
+        })
+        // pages为一个二维数组 包含了每页应该显示的内容
+        return pages
+      }
     }
   }
 }
