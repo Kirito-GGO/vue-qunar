@@ -24,7 +24,8 @@
       <!-- v-for="(item, key) of cities" 对象也可被v-for循环 第二项就不是index而是key -->
       <div class="area"
            v-for="(item, key) of cities"
-           :key="key">
+           :key="key"
+           :ref="key">
         <div class="title border-topbottom">{{key}}</div>
         <div class="item-list">
           <div class="item border-bottom"
@@ -42,12 +43,28 @@ export default {
   name: 'CityList',
   props: {
     hot: Array,
-    cities: Object
+    cities: Object,
+    // 子组件接收到父组件传递的letter
+    letter: String
   },
   // 生命周期函数 在dom挂载完毕执行
   mounted () {
     // 创建better-scroll的实例 实例创建的时候要接收一个dom元素或者dom选择器
     this.scroll = new Bscroll(this.$refs.wrapper)
+  },
+  // 侦听器
+  watch: {
+    // 监听letter的变化 一旦letter变了就执行函数
+    letter () {
+      if (this.letter) {
+        // this.$refs[this.letter] 获取到点击区域的dom 是数组类型
+        // scrollToElement() 方法不接收数组类型 所以面加上[0]
+        const element = this.$refs[this.letter][0]
+        // this.scroll.scrollToElement() better-scroll插件提供的方法
+        // 让better-scroll的滚动区域自动滚动到某个元素上
+        this.scroll.scrollToElement(element)
+      }
+    }
   }
 }
 </script>

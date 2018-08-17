@@ -2,9 +2,14 @@
   <div>
     <city-header></city-header>
     <city-search></city-search>
+    <!-- 把父组件的letter传递给子组件2 -->
     <city-list :cities="cities"
-               :hot="hotCities"></city-list>
-    <city-alphabet :cities="cities"></city-alphabet>
+               :hot="hotCities"
+               :letter="letter"></city-list>
+    <!-- 在父组件监听事件@change="handleLetterChange" -->
+    <!-- 事件名为change 如果监听到了 就触发handleLetterChange方法 -->
+    <city-alphabet :cities="cities"
+                   @change="handleLetterChange"></city-alphabet>
   </div>
 </template>
 <script>
@@ -26,7 +31,9 @@ export default {
       // ABC对应的城市的名字
       cities: {},
       // 热门城市
-      hotCities: []
+      hotCities: [],
+      // 用于接收子组件发送过来的letter
+      letter: ''
     }
   },
   methods: {
@@ -42,6 +49,11 @@ export default {
         this.cities = data.cities
         this.hotCities = data.hotCities
       }
+    },
+    // 父组件接收到子组件发送的数据letter
+    handleLetterChange (letter) {
+      // 把值保存到父组件
+      this.letter = letter
     }
   },
   mounted () {
