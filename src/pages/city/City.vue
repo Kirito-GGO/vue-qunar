@@ -1,7 +1,7 @@
 <template>
   <div>
     <city-header></city-header>
-    <city-search></city-search>
+    <city-search :cities="cities"></city-search>
     <!-- 把父组件的letter传递给子组件2 -->
     <city-list :cities="cities"
                :hot="hotCities"
