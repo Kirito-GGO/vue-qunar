@@ -24,13 +24,13 @@ export default new Vuex.Store({
   //   }
   // },
   // 4.mutations
-  mutations,
-  // 类似组件中的计算属性 当我们需要根据state里面的数据算出一些新的数据的时候使用getters 可以避免数据的冗余
-  getters: {
-    doubleCity (state) {
-      return state.city + ' ' + state.city
-    }
-  }
+  mutations
+  // // 类似组件中的计算属性 当我们需要根据state里面的数据算出一些新的数据的时候使用getters 可以避免数据的冗余
+  // getters: {
+  //   doubleCity (state) {
+  //     return state.city + ' ' + state.city
+  //   }
+  // }
   /*
   module 当遇到一个非常复杂的业务场景 比如说管理后台系统的时候
   经常有很多共有的数据在vuex中存储 如果把所有的mutations都放在mutations.js里

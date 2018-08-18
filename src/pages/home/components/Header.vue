@@ -15,8 +15,8 @@
         <!-- {{this.$store.state.city}} -->
 
         <!-- 映射之后直接使用this.city -->
-        <!-- {{this.city}} -->
-        {{this.doubleCity}}
+        {{this.city}}
+        <!-- {{this.doubleCity}} -->
         <span class="iconfont arrow-icon">&#xe64a;</span>
       </div>
     </router-link>
@@ -25,7 +25,8 @@
 
 <script>
 // 引入vuex的mapState和mapGetters API
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
+// import { mapState, mapGetters } from 'vuex'
 // 导出一个对象
 export default {
   // 组件的名字
@@ -34,9 +35,9 @@ export default {
   computed: {
     // ...展开运算符
     // mapState是指把vuex里面的数据映射到这个组件的computed里 需要映射的数据是city
-    ...mapState(['city']),
-    // 会把vuex的getters映射到当前组件的计算属性里
-    ...mapGetters(['doubleCity'])
+    ...mapState(['city'])
+    // // 会把vuex的getters映射到当前组件的计算属性里
+    // ...mapGetters(['doubleCity'])
   }
 }
 </script>

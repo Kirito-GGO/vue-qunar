@@ -16,6 +16,7 @@ import HomeIcons from './components/icons'
 import HomeRecommend from './components/Recommend'
 import HomeWeekend from './components/Weekend'
 import axios from 'axios'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Home',
@@ -29,17 +30,25 @@ export default {
   },
   data () {
     return {
+      // 缓存城市(上一次城市)
+      lastCity: '',
       swiperList: [],
       iconList: [],
       recommendList: [],
       weekendList: []
     }
   },
+  // 计算属性
+  computed: {
+    // 获取vuex中的city
+    ...mapState(['city'])
+  },
   methods: {
     // 定义getHomeInfo函数
     getHomeInfo () {
       // 发送get请求
-      axios.get('/api/index.json')
+      // 不同的城市需要不用的数据 所有ajax请求this.city对应的城市的数据
+      axios.get(`/api/index.json?city=${this.city}`)
         // 返回一个Promise对象
         // 数据获取成功调用getHomeInfoSucc函数
         .then(this.getHomeInfoSucc)
@@ -56,10 +65,21 @@ export default {
       }
     }
   },
-  // 生命周期函数 vue实例中的dom被挂载到页面上后触发
+  // 生命周期函数 vue实例中的dom被挂载到页面上后触发 初次加载的时候
   mounted () {
+    this.lastCity = this.city
     // 调用getHomeInfo函数
     this.getHomeInfo()
+  },
+  // 当页面重新被显示的时候activated执行 首次加载时在mounted后执行
+  activated () {
+    // 判断缓存城市(上一次城市)和当前城市是否相同 如果相同
+    if (this.lastCity !== this.city) {
+      // 缓存城市等于当前城市
+      this.lastCity = this.city
+      // 发送ajax 请求新城市的数据
+      this.getHomeInfo()
+    }
   }
 }
 </script>
