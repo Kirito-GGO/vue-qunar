@@ -7,7 +7,7 @@
         <div class="title border-topbottom">当前城市</div>
         <div class="button-list">
           <div class="button-wrapper">
-            <div class="button">北京</div>
+            <div class="button">{{this.currentCity}}</div>
           </div>
         </div>
       </div>
@@ -16,7 +16,8 @@
         <div class="button-list">
           <div class="button-wrapper"
                v-for="item of hot"
-               :key="item.id">
+               :key="item.id"
+               @click="handleCityClick(item.name)">
             <div class="button">{{item.name}}</div>
           </div>
         </div>
@@ -30,7 +31,8 @@
         <div class="item-list">
           <div class="item border-bottom"
                v-for="innerItem of item"
-               :key="innerItem.id">{{innerItem.name}}</div>
+               :key="innerItem.id"
+               @click="handleCityClick(innerItem.name)">{{innerItem.name}}</div>
         </div>
       </div>
     </div>
@@ -39,6 +41,7 @@
 <script>
 // better-scroll 是一款重点解决移动端各种滚动场景需求的插件
 import Bscroll from 'better-scroll'
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'CityList',
   props: {
@@ -47,10 +50,28 @@ export default {
     // 子组件接收到父组件传递的letter
     letter: String
   },
-  // 生命周期函数 在dom挂载完毕执行
-  mounted () {
-    // 创建better-scroll的实例 实例创建的时候要接收一个dom元素或者dom选择器
-    this.scroll = new Bscroll(this.$refs.wrapper)
+  computed: {
+    // 传递的内容可以是数组也可以是对象
+    ...mapState({
+      // 把vuex里的city这个共有数据 映射到当前组件的计算属性里 映射过来后名字叫currentCity
+      currentCity: 'city'
+    })
+  },
+  methods: {
+    handleCityClick (city) {
+      /* 方法1 */
+      // 1.执行dispath方法调用Actions
+      // 派发一个名字叫做changCity的Actions 传递参数city
+      // this.$store.dispatch('changCity', city)
+      /* 方法2 */
+      // 直接执行commit调用mutations
+      // this.$store.commit('changCity', city)
+      // this.changCity(要传递的参数))
+      this.changCity(city)
+      this.$router.push('/')
+    },
+    // 我们有一个mutations叫changCity 把这个mutations映射到当前组件的changCity方法里
+    ...mapMutations(['changCity'])
   },
   // 侦听器
   watch: {
@@ -65,6 +86,11 @@ export default {
         this.scroll.scrollToElement(element)
       }
     }
+  },
+  // 生命周期函数 在dom挂载完毕执行
+  mounted () {
+    // 创建better-scroll的实例 实例创建的时候要接收一个dom元素或者dom选择器
+    this.scroll = new Bscroll(this.$refs.wrapper)
   }
 }
 </script>

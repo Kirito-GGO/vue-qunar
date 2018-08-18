@@ -7,6 +7,8 @@ import router from './router'
 import fastClick from 'fastclick'
 // 引入vue-awesome-swiper轮播图插件
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+// 引入vuex创建的仓库
+import store from './store'
 // 引入vue-awesome-swiper轮播图插件的css
 import 'swiper/dist/css/swiper.css'
 // reset.css 重置基本样式 保证各种浏览器显示效果一致
@@ -27,6 +29,9 @@ Vue.use(VueAwesomeSwiper)
 new Vue({
   el: '#app',
   router,
+  // store: store 创建根vue实例时把store传入进去(vuex创建的仓库)
+  // 如果键和值一个直接写一个
+  store,
   components: { App },
   template: '<App/>'
 })

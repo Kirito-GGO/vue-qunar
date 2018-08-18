@@ -13,7 +13,8 @@
       <ul>
         <li class="search-item border-bottom"
             v-for="item of list"
-            :key="item.id">{{item.name}}</li>
+            :key="item.id"
+            @click="handleCityClick(item.name)">{{item.name}}</li>
         <li class="search-item border-bottom"
             v-show="hasNoData">没有找到匹配数据</li>
       </ul>
@@ -22,6 +23,7 @@
 </template>
 <script>
 import Bscroll from 'better-scroll'
+import { mapMutations } from 'vuex'
 export default {
   name: 'CitySearch',
   props: {
@@ -74,6 +76,16 @@ export default {
         this.list = result
       }, 100)
     }
+  },
+  methods: {
+    handleCityClick (city) {
+      this.changCity(city)
+      // 页面跳转
+      // 因为项目中使用了vue-router 所以每一个组件都有$router实例属性
+      // 使用this.$router.push()方法进行页面跳转 想调到哪一页就push哪一个地址进去
+      this.$router.push('/')
+    },
+    ...mapMutations(['changCity'])
   },
   mounted () {
     this.Bscroll = new Bscroll(this.$refs.search)

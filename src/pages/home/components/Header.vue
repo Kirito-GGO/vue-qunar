@@ -9,7 +9,14 @@
     </div>
     <router-link to="/city">
       <div class="header-right">
-        {{this.city}}
+        <!-- this.$store就是Vuex.Store -->
+        <!-- 为什么每个组件都可以使用this.$store 因为创建根组件的时候把store传递进去了 接着vuex创建的store会被派发到每一个子组件里面 -->
+        <!-- 所以在每个子组件中都可以使用this.$store获取到store -->
+        <!-- {{this.$store.state.city}} -->
+
+        <!-- 映射之后直接使用this.city -->
+        <!-- {{this.city}} -->
+        {{this.doubleCity}}
         <span class="iconfont arrow-icon">&#xe64a;</span>
       </div>
     </router-link>
@@ -17,12 +24,19 @@
 </template>
 
 <script>
+// 引入vuex的mapState和mapGetters API
+import { mapState, mapGetters } from 'vuex'
 // 导出一个对象
 export default {
   // 组件的名字
   name: 'HomeHeader',
-  props: {
-    city: String
+  // 计算属性
+  computed: {
+    // ...展开运算符
+    // mapState是指把vuex里面的数据映射到这个组件的computed里 需要映射的数据是city
+    ...mapState(['city']),
+    // 会把vuex的getters映射到当前组件的计算属性里
+    ...mapGetters(['doubleCity'])
   }
 }
 </script>
@@ -56,7 +70,8 @@ export default {
     border-radius 0.1rem
     color #ccc
   .header-right
-    width 1.24rem
+    min-width 1.04rem
+    padding 0 0.1rem
     float right
     text-align center
     color #fff
