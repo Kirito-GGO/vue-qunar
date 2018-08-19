@@ -3,6 +3,7 @@ import Router from 'vue-router'
 // @代表src目录下
 import Home from '@/pages/home/Home'
 import City from '@/pages/city/City'
+import Detail from '@/pages/detail/Detail'
 
 Vue.use(Router)
 
@@ -19,6 +20,12 @@ export default new Router({
       path: '/city',
       name: 'City',
       component: City
+    },
+    {
+      // 动态路由 /detail/:id 前面的路径必须是/detail/ 后面可以带一个参数 这个参数会放到id这个变量中
+      path: '/detail/:id',
+      name: 'Detail',
+      component: Detail
     }
   ]
 })
