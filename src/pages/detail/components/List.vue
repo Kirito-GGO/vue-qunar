@@ -37,7 +37,7 @@ export default {
   display inline-block
   width 0.36rem
   height 0.36rem
-  background url('http://s.qunarzz.com/piao/image/touch/sight/detail.png') 0 -0.45rem no-repeat
+  background url('/static/images/detail.png') 0 -0.45rem no-repeat
   margin-right 0.1rem
   background-size 0.4rem 3rem
 .item-children
