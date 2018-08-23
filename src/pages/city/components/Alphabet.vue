@@ -4,7 +4,7 @@
         v-for="item of letters"
         :key="item"
         :ref="item"
-        @touchstart="handleTouchStart"
+        @touchstart.prevent="handleTouchStart"
         @touchmove="handleTouchMove"
         @touchend="handleTouchEnd"
         @click="handleLetterClick">{{item}}</li>
@@ -25,8 +25,8 @@ export default {
     letters () {
       const letters = []
       // for in 循环得到key
-      for (let key in this.cities) {
-        letters.push(key)
+      for (let i in this.cities) {
+        letters.push(i)
       }
       // letters = ['A', 'B', ...]
       return letters
@@ -76,7 +76,7 @@ export default {
           // 减79是减去了顶部标题和搜索框的距离
           const touchY = e.touches[0].clientY - 79
           // 手指现在在的字母index = 向下取整(手指现在的位置距离顶部的高度 - A字母元素距离顶部的高度) / 每个字母的高度
-          const index = Math.floor(touchY - this.startY) / 20
+          const index = Math.floor((touchY - this.startY) / 20)
           // index 可能出现小数 这种情况this.letters[index]等于undefined
           if (index >= 0 && index < this.letters.length) {
             this.$emit('change', this.letters[index])
