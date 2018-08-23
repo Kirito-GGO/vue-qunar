@@ -27,5 +27,9 @@ export default new Router({
       name: 'Detail',
       component: Detail
     }
-  ]
+  ],
+  // 每次进入新页面 x轴滚动条初始位置为0 y轴滚动条初始位置为0 也就是页面切换的时候始终保持最顶部
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 })
