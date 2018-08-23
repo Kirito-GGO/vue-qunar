@@ -43,7 +43,12 @@ export default {
     }
   },
   activated () {
+    // 绑定在window上的事件需要解绑
     window.addEventListener('scroll', this.handleScroll)
+  },
+  deactivated () {
+    // 解绑事件
+    window.removeEventListener('scroll', this.handleScroll)
   }
 }
 </script>
