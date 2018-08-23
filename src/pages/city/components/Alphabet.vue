@@ -1,5 +1,6 @@
 <template>
   <ul class="list">
+    <!-- @touchstart.prevent 阻止默认行为 -->
     <li class="item"
         v-for="item of letters"
         :key="item"

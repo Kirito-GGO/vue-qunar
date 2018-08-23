@@ -7,6 +7,8 @@ import router from './router'
 import fastClick from 'fastclick'
 // 引入vue-awesome-swiper轮播图插件
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+// 引入babel-polyfill 他会判断浏览器是否支持Promise 如果不支持就自动向浏览器添加这些ES6新特性
+import 'babel-polyfill'
 // 引入vuex创建的仓库
 import store from './store'
 // 引入vue-awesome-swiper轮播图插件的css

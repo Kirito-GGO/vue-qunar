@@ -61,6 +61,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
+    // 代表打包后的项目要运行在后端的project文件夹中
     assetsPublicPath: '/',
 
     /**
